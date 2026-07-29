@@ -1,0 +1,54 @@
+{% extends "admin/base.html" %}
+{% block title %}Stats{% endblock %}
+{% block admin_content %}
+  <h1>Stats</h1>
+
+  <div class="stats-grid">
+    <div class="stat-box">
+      <h3>Tokens earned per kid (all-time)</h3>
+      <canvas id="chartTokens"></canvas>
+    </div>
+    <div class="stat-box">
+      <h3>Completions by hour of day</h3>
+      <canvas id="chartHour"></canvas>
+    </div>
+    <div class="stat-box">
+      <h3>Completions by day of week</h3>
+      <canvas id="chartWeekday"></canvas>
+    </div>
+    <div class="stat-box">
+      <h3>Most completed chores</h3>
+      <canvas id="chartChores"></canvas>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+  <script>
+    async function fetchJSON(url) {
+      const res = await fetch(url);
+      return res.json();
+    }
+
+    function barChart(ctx, labels, data, label) {
+      return new Chart(ctx, {
+        type: 'bar',
+        data: { labels, datasets: [{ label, data, backgroundColor: '#5865f2' }] },
+        options: { responsive: true, plugins: { legend: { display: false } } },
+      });
+    }
+
+    (async () => {
+      const tokens = await fetchJSON("{{ url_for('api_tokens_per_kid') }}");
+      barChart(document.getElementById('chartTokens'), tokens.labels, tokens.earned, 'Tokens earned');
+
+      const hour = await fetchJSON("{{ url_for('api_completions_by_hour') }}");
+      barChart(document.getElementById('chartHour'), hour.labels, hour.counts, 'Completions');
+
+      const weekday = await fetchJSON("{{ url_for('api_completions_by_weekday') }}");
+      barChart(document.getElementById('chartWeekday'), weekday.labels, weekday.counts, 'Completions');
+
+      const chores = await fetchJSON("{{ url_for('api_completions_by_chore') }}");
+      barChart(document.getElementById('chartChores'), chores.labels, chores.counts, 'Completions');
+    })();
+  </script>
+{% endblock %}

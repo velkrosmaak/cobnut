@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Who's doing chores?{% endblock %}
+{% block content %}
+  <h1>Who's doing chores today?</h1>
+  <div class="kid-grid">
+    {% for kid in kids %}
+      <a class="kid-card" href="{{ url_for('kid_detail', kid_id=kid.id) }}">
+        {% if kid.profile_image %}
+          <img class="kid-avatar" src="{{ url_for('static', filename='uploads/kids/' + kid.profile_image) }}" alt="{{ kid.name }}">
+        {% else %}
+          <div class="kid-avatar placeholder">{{ kid.name[0] }}</div>
+        {% endif %}
+        <div class="kid-name">{{ kid.name }}</div>
+        <div class="kid-balance">
+          {% if kid.token_image %}
+            <img class="token-icon" src="{{ url_for('static', filename='uploads/tokens/' + kid.token_image) }}" alt="tokens">
+          {% endif %}
+          {{ kid.balance() }}
+        </div>
+      </a>
+    {% else %}
+      <p>No kids set up yet. Head to <a href="{{ url_for('admin_kids') }}">/admin/kids</a> to add one.</p>
+    {% endfor %}
+  </div>
+
+  <p class="admin-link"><a href="{{ url_for('admin_dashboard') }}">Parent admin →</a></p>
+{% endblock %}

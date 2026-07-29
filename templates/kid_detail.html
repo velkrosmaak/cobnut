@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}{{ kid.name }}'s chores{% endblock %}
+{% block content %}
+  <a class="back-link" href="{{ url_for('index') }}">&larr; Switch kid</a>
+
+  <div class="kid-header">
+    {% if kid.profile_image %}
+      <img class="kid-avatar large" src="{{ url_for('static', filename='uploads/kids/' + kid.profile_image) }}" alt="{{ kid.name }}">
+    {% else %}
+      <div class="kid-avatar large placeholder">{{ kid.name[0] }}</div>
+    {% endif %}
+    <div>
+      <h1>{{ kid.name }}</h1>
+      <div class="kid-balance large" id="token-balance">
+        {% if kid.token_image %}
+          <img class="token-icon" src="{{ url_for('static', filename='uploads/tokens/' + kid.token_image) }}" alt="tokens">
+        {% endif %}
+        <span id="balance-number">{{ kid.balance() }}</span> tokens
+      </div>
+    </div>
+  </div>
+
+  <h2>Chores</h2>
+  <div class="chore-grid">
+    {% for item in chore_status %}
+      {% set chore = item.chore %}
+      <div class="chore-card {{ 'done' if item.done else '' }}" data-chore-card="{{ chore.id }}">
+        {% if chore.image %}
+          <img class="chore-image" src="{{ url_for('static', filename='uploads/chores/' + chore.image) }}" alt="{{ chore.name }}">
+        {% endif %}
+        <div class="chore-name">{{ chore.name }}</div>
+        <div class="chore-meta">
+          {{ chore.tokens }} token{{ 's' if chore.tokens != 1 else '' }} &middot; {{ chore.frequency }}
+        </div>
+        <form
+          class="complete-form"
+          method="post"
+          action="{{ url_for('complete_chore', kid_id=kid.id, chore_id=chore.id) }}"
+          data-tokens="{{ chore.tokens }}"
+          data-reset-label="{{ chore.next_reset_label() }}"
+        >
+          {% if item.done %}
+            <button type="submit" class="btn done" disabled>Done — resets {{ chore.next_reset_label() }}</button>
+          {% else %}
+            <button type="submit" class="btn">Mark done!</button>
+          {% endif %}
+        </form>
+      </div>
+    {% else %}
+      <p>No chores assigned yet.</p>
+    {% endfor %}
+  </div>
+
+  {% if recent %}
+    <h2>Recent activity</h2>
+    <ul class="recent-list">
+      {% for c in recent %}
+        <li>{{ c.timestamp.strftime('%a %d %b, %H:%M') }} &mdash; {{ c.chore_name_snapshot }} (+{{ c.tokens_awarded }})</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <div id="token-image-source" data-src="{{ url_for('static', filename='uploads/tokens/' + kid.token_image) if kid.token_image else '' }}" hidden></div>
+
+  <script src="{{ url_for('static', filename='js/kid.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ 'Edit' if kid else 'Add' }} kid{% endblock %}
+{% block admin_content %}
+  <h1>{{ 'Edit' if kid else 'Add' }} kid</h1>
+
+  <form method="post" enctype="multipart/form-data" class="stacked-form">
+    <label>Name
+      <input type="text" name="name" value="{{ kid.name if kid else '' }}" required>
+    </label>
+
+    <label>Profile image
+      {% if kid and kid.profile_image %}
+        <img class="preview" src="{{ url_for('static', filename='uploads/kids/' + kid.profile_image) }}" alt="current">
+      {% endif %}
+      <input type="file" name="profile_image" accept="image/*">
+    </label>
+
+    <label>Token icon (this kid's reward token image)
+      {% if kid and kid.token_image %}
+        <img class="preview" src="{{ url_for('static', filename='uploads/tokens/' + kid.token_image) }}" alt="current">
+      {% endif %}
+      <input type="file" name="token_image" accept="image/*">
+    </label>
+
+    <label class="checkbox-label">
+      <input type="checkbox" name="active" {{ 'checked' if not kid or kid.active else '' }}>
+      Active (shown on kid picker)
+    </label>
+
+    <button type="submit" class="btn">Save</button>
+    <a href="{{ url_for('admin_kids') }}">Cancel</a>
+  </form>
+{% endblock %}

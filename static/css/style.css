@@ -1,0 +1,437 @@
+/* ===== Design tokens =====
+   A dark, candy-bright theme built for kids: deep indigo-black backdrop so
+   the accent colors and token art pop, chunky rounded type (Baloo 2) for
+   anything a kid reads or presses, Nunito for supporting text.
+*/
+:root {
+  --bg: #14102a;
+  --bg-alt: #1c1638;
+  --card: #241d44;
+  --card-border: #382a63;
+  --text: #f5f2ff;
+  --muted: #b3a6d9;
+
+  --pink: #ff5d8f;
+  --yellow: #ffd166;
+  --teal: #2ec4b6;
+  --purple: #a06cd5;
+  --blue: #4cc9f0;
+  --green: #4be389;
+  --red: #ff6b6b;
+
+  --font-display: 'Baloo 2', system-ui, sans-serif;
+  --font-body: 'Nunito', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background:
+    radial-gradient(circle at 15% 0%, rgba(160,108,213,0.25), transparent 45%),
+    radial-gradient(circle at 90% 15%, rgba(76,201,240,0.18), transparent 40%),
+    var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-weight: 600;
+}
+
+h1, h2, h3, .brand, .btn, .kid-name, .chore-name {
+  font-family: var(--font-display);
+}
+
+.topbar {
+  background: linear-gradient(120deg, var(--purple), var(--pink));
+  padding: 1.1rem 1.5rem;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+}
+.brand {
+  color: white;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: 0.3px;
+}
+
+.container { max-width: 1000px; margin: 0 auto; padding: 1.75rem 1.25rem 4rem; }
+
+h1 { font-size: 2rem; font-weight: 800; margin: 0.2rem 0 1rem; }
+h2 { font-size: 1.4rem; font-weight: 700; margin: 1.75rem 0 0.75rem; color: var(--yellow); }
+
+.flashes { margin-bottom: 1rem; }
+.flash {
+  padding: 0.75rem 1.1rem; border-radius: 14px; margin-bottom: 0.6rem;
+  font-weight: 700; font-family: var(--font-display);
+}
+.flash-success { background: rgba(75,227,137,0.18); color: var(--green); border: 2px solid rgba(75,227,137,0.4); }
+.flash-error { background: rgba(255,107,107,0.18); color: var(--red); border: 2px solid rgba(255,107,107,0.4); }
+.flash-info { background: rgba(76,201,240,0.18); color: var(--blue); border: 2px solid rgba(76,201,240,0.4); }
+
+a { color: var(--blue); }
+
+/* ===== Kid picker =====
+   Flexbox is the base layout (works on essentially every browser still in
+   use, including older embedded WebKit); it's progressively upgraded to
+   CSS Grid for browsers that support it, which gives tidier equal-width
+   columns. Either way the layout wraps and stays usable. */
+.kid-grid, .chore-grid {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-top: 1.25rem;
+}
+.kid-grid > *, .chore-grid > * {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 190px;
+  flex: 1 1 190px;
+  margin: 0 1.25rem 1.25rem 0;
+}
+@supports (display: grid) {
+  .kid-grid, .chore-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+  }
+  .kid-grid > *, .chore-grid > * {
+    margin: 0;
+  }
+}
+
+.kid-card {
+  background: var(--card);
+  border: 3px solid var(--card-border);
+  border-radius: 22px;
+  padding: 1.4rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  color: var(--text);
+  box-shadow: 0 6px 0 rgba(0,0,0,0.25);
+  transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+.kid-card:hover { transform: translateY(-4px) scale(1.02); }
+.kid-grid > .kid-card:nth-child(6n+1) { border-color: var(--pink); }
+.kid-grid > .kid-card:nth-child(6n+2) { border-color: var(--yellow); }
+.kid-grid > .kid-card:nth-child(6n+3) { border-color: var(--teal); }
+.kid-grid > .kid-card:nth-child(6n+4) { border-color: var(--purple); }
+.kid-grid > .kid-card:nth-child(6n+5) { border-color: var(--blue); }
+.kid-grid > .kid-card:nth-child(6n+6) { border-color: var(--green); }
+
+.kid-avatar {
+  width: 92px; height: 92px; border-radius: 50%; object-fit: cover;
+  margin: 0 auto; display: block; border: 4px solid rgba(255,255,255,0.15);
+}
+.kid-avatar.large { width: 120px; height: 120px; }
+.kid-avatar.placeholder {
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--purple), var(--pink));
+  color: white; font-size: 2.4rem; font-weight: 800; font-family: var(--font-display);
+}
+
+.kid-name { font-weight: 800; margin-top: 0.6rem; font-size: 1.3rem; }
+.kid-balance {
+  display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+  color: var(--yellow); margin-top: 0.35rem; font-weight: 800; font-size: 1.15rem;
+  font-family: var(--font-display);
+}
+.kid-balance.large { font-size: 1.6rem; justify-content: flex-start; }
+.token-icon { width: 26px; height: 26px; object-fit: contain; }
+.kid-balance.large .token-icon { width: 34px; height: 34px; }
+
+.kid-header { display: flex; gap: 1.25rem; align-items: center; margin: 1rem 0 1.75rem; }
+
+/* ===== Chore cards ===== */
+.chore-card {
+  background: var(--card);
+  border: 3px solid var(--card-border);
+  border-radius: 22px;
+  padding: 1.25rem;
+  text-align: center;
+  box-shadow: 0 6px 0 rgba(0,0,0,0.25);
+  position: relative;
+  overflow: visible;
+  transition: transform .15s ease;
+}
+.chore-grid > .chore-card:nth-child(5n+1) { border-color: var(--teal); }
+.chore-grid > .chore-card:nth-child(5n+2) { border-color: var(--pink); }
+.chore-grid > .chore-card:nth-child(5n+3) { border-color: var(--yellow); }
+.chore-grid > .chore-card:nth-child(5n+4) { border-color: var(--purple); }
+.chore-grid > .chore-card:nth-child(5n+5) { border-color: var(--blue); }
+
+.chore-card.done { opacity: 0.55; transform: scale(0.98); }
+.chore-image { width: 100%; height: 110px; object-fit: cover; border-radius: 14px; margin-bottom: 0.6rem; }
+.chore-name { font-weight: 800; font-size: 1.2rem; }
+.chore-meta { color: var(--muted); font-size: 0.95rem; margin: 0.3rem 0 1rem; font-weight: 700; }
+
+/* ===== Big chunky buttons ===== */
+.btn {
+  background: linear-gradient(135deg, var(--teal), var(--blue));
+  color: #0d1030;
+  border: none;
+  border-radius: 18px;
+  padding: 1rem 1.5rem;
+  font-weight: 800;
+  font-size: 1.15rem;
+  font-family: var(--font-display);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 5px 0 rgba(0,0,0,0.3);
+  transition: transform .08s ease, box-shadow .08s ease;
+}
+.btn:hover { filter: brightness(1.08); }
+.btn:active { transform: translateY(3px); box-shadow: 0 2px 0 rgba(0,0,0,0.3); }
+.chore-card button.btn { width: 100%; }
+.btn.done {
+  background: linear-gradient(135deg, #3d3560, #2a2246);
+  color: var(--muted);
+  cursor: default;
+  box-shadow: none;
+}
+.btn.shake { animation: shake 0.4s ease; }
+
+.back-link, .admin-link { display: inline-block; margin-bottom: 0.5rem; font-weight: 700; }
+
+.recent-list { padding-left: 1.2rem; color: var(--muted); font-weight: 700; }
+
+/* ===== Admin (kept calmer/denser — parents, not kids, use this) ===== */
+.admin-nav { display: flex; gap: 1.25rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.admin-nav a { color: var(--yellow); text-decoration: none; font-weight: 800; font-family: var(--font-display); }
+
+.admin-grid {
+  display: -webkit-box; display: -webkit-flex; display: flex;
+  -webkit-flex-wrap: wrap; flex-wrap: wrap;
+  margin: 1rem 0;
+}
+.admin-grid > * { -webkit-flex: 1 1 220px; flex: 1 1 220px; margin: 0 1rem 1rem 0; }
+@supports (display: grid) {
+  .admin-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+  .admin-grid > * { margin: 0; }
+}
+.admin-card { background: var(--card); border: 2px solid var(--card-border); border-radius: 16px; padding: 1.1rem; margin-bottom: 1rem; }
+.admin-card-header { display: flex; align-items: center; gap: 0.75rem; }
+.admin-card-header .kid-avatar { width: 48px; height: 48px; margin: 0; }
+
+.admin-table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; }
+.admin-table th, .admin-table td { text-align: left; padding: 0.6rem; border-bottom: 1px solid var(--card-border); }
+.thumb { width: 40px; height: 40px; object-fit: cover; border-radius: 8px; }
+
+.stacked-form { display: flex; flex-direction: column; gap: 0.9rem; max-width: 420px; margin-top: 1rem; }
+.stacked-form label { display: flex; flex-direction: column; gap: 0.3rem; font-weight: 700; font-size: 0.95rem; }
+.stacked-form input[type="text"], .stacked-form input[type="number"], .stacked-form select {
+  padding: 0.6rem; border: 2px solid var(--card-border); border-radius: 10px; font-size: 1rem;
+  background: var(--bg-alt); color: var(--text);
+}
+.checkbox-label { flex-direction: row !important; align-items: center; }
+.preview { width: 60px; height: 60px; object-fit: cover; border-radius: 10px; margin-bottom: 0.3rem; }
+
+.inline-form { display: inline; }
+.link-btn { background: none; border: none; color: var(--blue); cursor: pointer; padding: 0; font: inherit; text-decoration: underline; font-weight: 700; }
+.link-btn.danger { color: var(--red); }
+.tag { font-size: 0.7rem; background: var(--bg-alt); color: var(--muted); padding: 0.15rem 0.5rem; border-radius: 8px; }
+
+.stats-grid {
+  display: -webkit-box; display: -webkit-flex; display: flex;
+  -webkit-flex-wrap: wrap; flex-wrap: wrap;
+  margin-top: 1rem;
+}
+.stats-grid > * { -webkit-flex: 1 1 320px; flex: 1 1 320px; margin: 0 1.5rem 1.5rem 0; }
+@supports (display: grid) {
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+  .stats-grid > * { margin: 0; }
+}
+.stat-box { background: var(--card); border: 2px solid var(--card-border); border-radius: 16px; padding: 1rem; }
+
+/* ===== Token burst animation (signature moment) =====
+   Fired from JS when a chore is completed: clones of the kid's token image
+   fly outward from the button, spinning, while a big shimmer of confetti
+   and sparkles scatters with them. Kept to a single orchestrated burst
+   rather than scattered effects elsewhere.
+
+   Movement and fade are two SEPARATE animations on the same element: the
+   fly-out is quick and explosive, but opacity fades out on its own, much
+   longer timeline afterwards, so particles linger and drift for a slower,
+   more magical finish instead of an abrupt end.
+
+   Compatibility note: this targets Chromium/WebKit engines broadly in use
+   today, including embedded/TV-style browsers such as the one on Samsung
+   Family Hub fridges (Tizen's browser). -webkit- prefixes are included
+   alongside standard properties for animation/transform/keyframes since
+   some of these embedded browsers lag several Chromium versions behind
+   desktop releases. The sparkle shape has a plain-diamond fallback (via
+   rotate) for engines without clip-path support, upgraded to a true star
+   only where @supports confirms clip-path works. */
+.burst-layer {
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  pointer-events: none;
+  z-index: 999;
+  overflow: hidden;
+}
+
+.burst-token,
+.burst-spark,
+.burst-sparkle {
+  position: absolute;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.burst-token {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  -webkit-animation: burst-move 950ms cubic-bezier(.12,.9,.28,1) forwards,
+                      burst-fade 3200ms ease-out forwards;
+  animation: burst-move 950ms cubic-bezier(.12,.9,.28,1) forwards,
+             burst-fade 3200ms ease-out forwards;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.45));
+}
+
+.burst-spark {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  -webkit-animation: burst-move 850ms cubic-bezier(.12,.9,.28,1) forwards,
+                      burst-fade 2600ms ease-out forwards;
+  animation: burst-move 850ms cubic-bezier(.12,.9,.28,1) forwards,
+             burst-fade 2600ms ease-out forwards;
+}
+
+.burst-sparkle {
+  width: 18px;
+  height: 18px;
+  -webkit-animation: burst-move 900ms cubic-bezier(.12,.9,.28,1) forwards,
+                      burst-fade 2900ms ease-out forwards;
+  animation: burst-move 900ms cubic-bezier(.12,.9,.28,1) forwards,
+             burst-fade 2900ms ease-out forwards;
+}
+.burst-sparkle::before {
+  content: "";
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background: var(--sparkle-color, #fff9d6);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -webkit-animation: sparkle-twinkle 420ms ease-in-out infinite alternate;
+  animation: sparkle-twinkle 420ms ease-in-out infinite alternate;
+}
+/* Progressive enhancement: true 8-point star shape where clip-path works */
+@supports (clip-path: polygon(0 0, 0 0, 0 0)) or (-webkit-clip-path: polygon(0 0, 0 0, 0 0)) {
+  .burst-sparkle::before {
+    -webkit-transform: none;
+    transform: none;
+    -webkit-clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%);
+    clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%);
+  }
+}
+
+@-webkit-keyframes burst-move {
+  0% { -webkit-transform: translate(0,0) scale(0.35) rotate(0deg); }
+  15% { -webkit-transform: translate(calc(var(--dx) * 0.3), calc(var(--dy) * 0.3)) scale(1.25) rotate(calc(var(--rot) * 0.3)); }
+  100% { -webkit-transform: translate(var(--dx), var(--dy)) scale(1.1) rotate(var(--rot)); }
+}
+@keyframes burst-move {
+  0% { transform: translate(0,0) scale(0.35) rotate(0deg); }
+  15% { transform: translate(calc(var(--dx) * 0.3), calc(var(--dy) * 0.3)) scale(1.25) rotate(calc(var(--rot) * 0.3)); }
+  100% { transform: translate(var(--dx), var(--dy)) scale(1.1) rotate(var(--rot)); }
+}
+
+/* Slow, lingering fade — this is what gives the burst its "magical" finish. */
+@-webkit-keyframes burst-fade {
+  0% { opacity: 1; }
+  55% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes burst-fade {
+  0% { opacity: 1; }
+  55% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@-webkit-keyframes sparkle-twinkle {
+  0% { -webkit-transform: rotate(45deg) scale(0.7); opacity: 0.6; }
+  100% { -webkit-transform: rotate(70deg) scale(1.15); opacity: 1; }
+}
+@keyframes sparkle-twinkle {
+  0% { transform: rotate(45deg) scale(0.7); opacity: 0.6; }
+  100% { transform: rotate(70deg) scale(1.15); opacity: 1; }
+}
+
+.ring-pulse {
+  position: absolute;
+  border-radius: 50%;
+  border: 4px solid var(--yellow);
+  -webkit-animation: ring-grow 700ms ease-out forwards;
+  animation: ring-grow 700ms ease-out forwards;
+}
+.ring-pulse.ring-2 { border-color: var(--pink); -webkit-animation-delay: 90ms; animation-delay: 90ms; }
+@-webkit-keyframes ring-grow {
+  0% { -webkit-transform: scale(0.3); opacity: 0.9; }
+  100% { -webkit-transform: scale(4.2); opacity: 0; }
+}
+@keyframes ring-grow {
+  0% { transform: scale(0.3); opacity: 0.9; }
+  100% { transform: scale(4.2); opacity: 0; }
+}
+
+.balance-pop { -webkit-animation: pop 480ms cubic-bezier(.3,1.7,.5,1); animation: pop 480ms cubic-bezier(.3,1.7,.5,1); }
+@-webkit-keyframes pop {
+  0% { -webkit-transform: scale(1); }
+  40% { -webkit-transform: scale(1.45); color: var(--green); }
+  100% { -webkit-transform: scale(1); }
+}
+@keyframes pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.45); color: var(--green); }
+  100% { transform: scale(1); }
+}
+
+@-webkit-keyframes shake {
+  0%, 100% { -webkit-transform: translateX(0); }
+  25% { -webkit-transform: translateX(-6px); }
+  75% { -webkit-transform: translateX(6px); }
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .burst-token, .burst-spark, .burst-sparkle, .burst-sparkle::before, .ring-pulse, .balance-pop, .btn.shake {
+    -webkit-animation: none !important;
+    animation: none !important;
+  }
+}
+
+/* ===== Responsive layout ===== */
+.table-scroll { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+@media (max-width: 720px) {
+  .container { padding: 1.1rem 0.85rem 3rem; }
+  h1 { font-size: 1.6rem; }
+  h2 { font-size: 1.2rem; }
+  .brand { font-size: 1.25rem; }
+  .topbar { padding: 0.9rem 1rem; }
+
+  .kid-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 0.85rem; }
+  .chore-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.85rem; }
+
+  .kid-header { flex-direction: column; align-items: flex-start; text-align: left; gap: 0.75rem; }
+  .kid-avatar.large { width: 88px; height: 88px; }
+  .kid-balance.large { font-size: 1.3rem; }
+
+  .btn { font-size: 1.05rem; padding: 0.9rem 1.2rem; }
+  .admin-nav { gap: 0.9rem; }
+  .stacked-form { max-width: 100%; }
+}
+
+@media (max-width: 420px) {
+  .kid-grid { grid-template-columns: repeat(2, 1fr); }
+  .chore-grid { grid-template-columns: 1fr; }
+  .kid-avatar { width: 76px; height: 76px; }
+}

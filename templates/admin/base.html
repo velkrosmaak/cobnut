@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+  <nav class="admin-nav">
+    <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('admin_kids') }}">Kids</a>
+    <a href="{{ url_for('admin_stats') }}">Stats</a>
+    <a href="{{ url_for('index') }}">View kid app →</a>
+  </nav>
+  {% block admin_content %}{% endblock %}
+{% endblock %}

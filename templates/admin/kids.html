@@ -1,0 +1,42 @@
+{% extends "admin/base.html" %}
+{% block title %}Manage kids{% endblock %}
+{% block admin_content %}
+  <h1>Kids</h1>
+  <p><a class="btn" href="{{ url_for('admin_kid_new') }}">+ Add kid</a></p>
+
+  {% for kid in kids %}
+    <div class="admin-card">
+      <div class="admin-card-header">
+        {% if kid.profile_image %}
+          <img class="kid-avatar" src="{{ url_for('static', filename='uploads/kids/' + kid.profile_image) }}" alt="{{ kid.name }}">
+        {% endif %}
+        <h3>{{ kid.name }} {% if not kid.active %}<span class="tag">inactive</span>{% endif %}</h3>
+      </div>
+      <p>Balance: <strong>{{ kid.balance() }}</strong> tokens (earned {{ kid.total_earned() }}, spent {{ kid.total_spent() }})</p>
+      <p>
+        <a href="{{ url_for('admin_kid_edit', kid_id=kid.id) }}">Edit</a>
+        &middot;
+        <a href="{{ url_for('admin_chores', kid_id=kid.id) }}">Chores</a>
+        &middot;
+        <form class="inline-form" method="post" action="{{ url_for('admin_kid_delete', kid_id=kid.id) }}" onsubmit="return confirm('Delete {{ kid.name }} and all their history?');">
+          <button type="submit" class="link-btn danger">Delete</button>
+        </form>
+      </p>
+
+      <details>
+        <summary>Log a reward redemption</summary>
+        <form method="post" action="{{ url_for('admin_redeem', kid_id=kid.id) }}" class="stacked-form">
+          <label>Description
+            <input type="text" name="description" placeholder="e.g. Movie night">
+          </label>
+          <label>Tokens spent
+            <input type="number" name="tokens_spent" min="1" required>
+          </label>
+          <button type="submit" class="btn">Record redemption</button>
+        </form>
+      </details>
+    </div>
+  {% else %}
+    <p>No kids yet.</p>
+  {% endfor %}
+{% endblock %}

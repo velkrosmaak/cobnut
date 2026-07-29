@@ -1,0 +1,40 @@
+{% extends "admin/base.html" %}
+{% block title %}Admin dashboard{% endblock %}
+{% block admin_content %}
+  <h1>Dashboard</h1>
+
+  <div class="admin-grid">
+    {% for kid in kids %}
+      <div class="admin-card">
+        <h3>{{ kid.name }}</h3>
+        <p>Balance: <strong>{{ kid.balance() }}</strong> &middot; Earned all-time: {{ kid.total_earned() }}</p>
+        <p>
+          <a href="{{ url_for('admin_chores', kid_id=kid.id) }}">Manage chores</a>
+          &middot;
+          <a href="{{ url_for('admin_kid_edit', kid_id=kid.id) }}">Edit profile</a>
+        </p>
+      </div>
+    {% else %}
+      <p>No kids yet. <a href="{{ url_for('admin_kid_new') }}">Add your first kid</a>.</p>
+    {% endfor %}
+  </div>
+
+  <h2>Recent completions</h2>
+  <div class="table-scroll">
+  <table class="admin-table">
+    <thead><tr><th>When</th><th>Kid</th><th>Chore</th><th>Tokens</th></tr></thead>
+    <tbody>
+      {% for c in recent %}
+        <tr>
+          <td>{{ c.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+          <td>{{ c.kid.name }}</td>
+          <td>{{ c.chore_name_snapshot }}</td>
+          <td>+{{ c.tokens_awarded }}</td>
+        </tr>
+      {% else %}
+        <tr><td colspan="4">No completions logged yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+{% endblock %}
