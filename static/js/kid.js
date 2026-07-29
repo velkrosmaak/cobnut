@@ -1,4 +1,4 @@
-/* Handles chore completion and fires the "token burst" animation.
+/* Handles job completion and fires the "token burst" animation.
 
    Written in a deliberately conservative style (var instead of let/const,
    function expressions instead of arrow functions, string concatenation
@@ -200,7 +200,7 @@
             button.className = (button.className + " done").trim();
             button.textContent = "Done — resets " + form.getAttribute("data-reset-label");
             var card = form.parentNode;
-            while (card && card.className.indexOf("chore-card") === -1) {
+            while (card && card.className.indexOf("job-card") === -1) {
               card = card.parentNode;
             }
             if (card) {

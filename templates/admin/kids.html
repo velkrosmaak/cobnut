@@ -7,8 +7,8 @@
   {% for kid in kids %}
     <div class="admin-card">
       <div class="admin-card-header">
-        {% if kid.profile_image %}
-          <img class="kid-avatar" src="{{ url_for('static', filename='uploads/kids/' + kid.profile_image) }}" alt="{{ kid.name }}">
+        {% if kid.profile_image_data %}
+          <img class="kid-avatar" src="{{ url_for('media_kid_profile', kid_id=kid.id) }}" alt="{{ kid.name }}">
         {% endif %}
         <h3>{{ kid.name }} {% if not kid.active %}<span class="tag">inactive</span>{% endif %}</h3>
       </div>
@@ -16,7 +16,7 @@
       <p>
         <a href="{{ url_for('admin_kid_edit', kid_id=kid.id) }}">Edit</a>
         &middot;
-        <a href="{{ url_for('admin_chores', kid_id=kid.id) }}">Chores</a>
+        <a href="{{ url_for('admin_jobs', kid_id=kid.id) }}">Jobs</a>
         &middot;
         <form class="inline-form" method="post" action="{{ url_for('admin_kid_delete', kid_id=kid.id) }}" onsubmit="return confirm('Delete {{ kid.name }} and all their history?');">
           <button type="submit" class="link-btn danger">Delete</button>

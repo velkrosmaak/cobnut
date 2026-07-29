@@ -1,0 +1,38 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ 'Edit' if job else 'Add' }} job{% endblock %}
+{% block admin_content %}
+  <p><a href="{{ url_for('admin_jobs', kid_id=kid.id) }}">&larr; {{ kid.name }}'s jobs</a></p>
+  <h1>{{ 'Edit' if job else 'Add' }} job for {{ kid.name }}</h1>
+
+  <form method="post" enctype="multipart/form-data" class="stacked-form">
+    <label>Name
+      <input type="text" name="name" value="{{ job.name if job else '' }}" required>
+    </label>
+
+    <label>Tokens
+      <input type="number" name="tokens" min="0" value="{{ job.tokens if job else 1 }}" required>
+    </label>
+
+    <label>Repeats
+      <select name="frequency">
+        <option value="daily" {{ 'selected' if job and job.frequency == 'daily' else '' }}>Daily</option>
+        <option value="weekly" {{ 'selected' if job and job.frequency == 'weekly' else '' }}>Weekly</option>
+      </select>
+    </label>
+
+    <label>Image
+      {% if job and job.image_data %}
+        <img class="preview" src="{{ url_for('media_job_image', job_id=job.id) }}" alt="current">
+      {% endif %}
+      <input type="file" name="image" accept="image/*">
+    </label>
+
+    <label class="checkbox-label">
+      <input type="checkbox" name="active" {{ 'checked' if not job or job.active else '' }}>
+      Active
+    </label>
+
+    <button type="submit" class="btn">Save</button>
+    <a href="{{ url_for('admin_jobs', kid_id=kid.id) }}">Cancel</a>
+  </form>
+{% endblock %}

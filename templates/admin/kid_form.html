@@ -9,15 +9,15 @@
     </label>
 
     <label>Profile image
-      {% if kid and kid.profile_image %}
-        <img class="preview" src="{{ url_for('static', filename='uploads/kids/' + kid.profile_image) }}" alt="current">
+      {% if kid and kid.profile_image_data %}
+        <img class="preview" src="{{ url_for('media_kid_profile', kid_id=kid.id) }}" alt="current">
       {% endif %}
       <input type="file" name="profile_image" accept="image/*">
     </label>
 
     <label>Token icon (this kid's reward token image)
-      {% if kid and kid.token_image %}
-        <img class="preview" src="{{ url_for('static', filename='uploads/tokens/' + kid.token_image) }}" alt="current">
+      {% if kid and kid.token_image_data %}
+        <img class="preview" src="{{ url_for('media_kid_token', kid_id=kid.id) }}" alt="current">
       {% endif %}
       <input type="file" name="token_image" accept="image/*">
     </label>

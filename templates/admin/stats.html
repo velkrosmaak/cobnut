@@ -17,8 +17,8 @@
       <canvas id="chartWeekday"></canvas>
     </div>
     <div class="stat-box">
-      <h3>Most completed chores</h3>
-      <canvas id="chartChores"></canvas>
+      <h3>Most completed jobs</h3>
+      <canvas id="chartJobs"></canvas>
     </div>
   </div>
 
@@ -47,8 +47,8 @@
       const weekday = await fetchJSON("{{ url_for('api_completions_by_weekday') }}");
       barChart(document.getElementById('chartWeekday'), weekday.labels, weekday.counts, 'Completions');
 
-      const chores = await fetchJSON("{{ url_for('api_completions_by_chore') }}");
-      barChart(document.getElementById('chartChores'), chores.labels, chores.counts, 'Completions');
+      const jobs = await fetchJSON("{{ url_for('api_completions_by_job') }}");
+      barChart(document.getElementById('chartJobs'), jobs.labels, jobs.counts, 'Completions');
     })();
   </script>
 {% endblock %}

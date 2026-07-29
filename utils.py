@@ -1,10 +1,7 @@
-import os
-import uuid
 from functools import wraps
 
 from flask import current_app, request, Response
 from werkzeug.security import check_password_hash
-from werkzeug.utils import secure_filename
 
 
 def allowed_file(filename):
@@ -12,33 +9,25 @@ def allowed_file(filename):
     return ext in current_app.config["ALLOWED_EXTENSIONS"]
 
 
-def save_upload(file_storage, subfolder):
-    """Save an uploaded image under static/uploads/<subfolder>/ with a random
-    prefix to avoid collisions. Returns the stored filename, or None if no
-    file was provided."""
+def read_image_upload(file_storage):
+    """Read an uploaded image into memory as (bytes, mimetype), for storage
+    directly in the database. Returns None if no file was provided.
+
+    Storing the bytes in the database (rather than saving to a file on disk)
+    means the images live wherever jobs.db lives — they can't quietly
+    disappear because of an ephemeral container filesystem, a redeploy that
+    doesn't carry over an untracked uploads folder, or similar, as long as
+    the database file itself is on persistent storage."""
     if not file_storage or file_storage.filename == "":
         return None
     if not allowed_file(file_storage.filename):
         raise ValueError("Unsupported image type. Use png, jpg, jpeg, gif, or webp.")
 
-    filename = secure_filename(file_storage.filename)
-    unique_name = f"{uuid.uuid4().hex[:10]}_{filename}"
-    folder = current_app.config["UPLOAD_FOLDERS"][subfolder]
-    os.makedirs(folder, exist_ok=True)
-    file_storage.save(os.path.join(folder, unique_name))
-    return unique_name
-
-
-def delete_upload(filename, subfolder):
-    if not filename:
-        return
-    folder = current_app.config["UPLOAD_FOLDERS"][subfolder]
-    path = os.path.join(folder, filename)
-    if os.path.exists(path):
-        try:
-            os.remove(path)
-        except OSError:
-            pass
+    data = file_storage.read()
+    if not data:
+        return None
+    mimetype = file_storage.mimetype or "application/octet-stream"
+    return data, mimetype
 
 
 def check_admin_auth(username, password):
@@ -57,13 +46,13 @@ def check_admin_auth(username, password):
 def authenticate_response():
     return Response(
         "Admin area: authentication required.", 401,
-        {"WWW-Authenticate": 'Basic realm="Chores Admin"'},
+        {"WWW-Authenticate": 'Basic realm="Jobs Admin"'},
     )
 
 
 def admin_required(view):
     """HTTP Basic Auth guard for /admin routes. This works regardless of how
-    the app is deployed (dev server, gunicorn, behind a proxy) unlike a plain
+    the app is deployed (dev server, gunicorn, behind any proxy) unlike a plain
     .htaccess file, which only applies when Apache itself is serving/proxying
     the path with AllowOverride enabled. See README for the .htaccess-based
     alternative if you're deploying under Apache + mod_wsgi."""

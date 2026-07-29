@@ -9,7 +9,7 @@
         <h3>{{ kid.name }}</h3>
         <p>Balance: <strong>{{ kid.balance() }}</strong> &middot; Earned all-time: {{ kid.total_earned() }}</p>
         <p>
-          <a href="{{ url_for('admin_chores', kid_id=kid.id) }}">Manage chores</a>
+          <a href="{{ url_for('admin_jobs', kid_id=kid.id) }}">Manage jobs</a>
           &middot;
           <a href="{{ url_for('admin_kid_edit', kid_id=kid.id) }}">Edit profile</a>
         </p>
@@ -22,13 +22,13 @@
   <h2>Recent completions</h2>
   <div class="table-scroll">
   <table class="admin-table">
-    <thead><tr><th>When</th><th>Kid</th><th>Chore</th><th>Tokens</th></tr></thead>
+    <thead><tr><th>When</th><th>Kid</th><th>Job</th><th>Tokens</th></tr></thead>
     <tbody>
       {% for c in recent %}
         <tr>
           <td>{{ c.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
           <td>{{ c.kid.name }}</td>
-          <td>{{ c.chore_name_snapshot }}</td>
+          <td>{{ c.job_name_snapshot }}</td>
           <td>+{{ c.tokens_awarded }}</td>
         </tr>
       {% else %}

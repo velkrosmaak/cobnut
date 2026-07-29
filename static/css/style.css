@@ -37,7 +37,7 @@ body {
   font-weight: 600;
 }
 
-h1, h2, h3, .brand, .btn, .kid-name, .chore-name {
+h1, h2, h3, .brand, .btn, .kid-name, .job-name {
   font-family: var(--font-display);
 }
 
@@ -75,7 +75,7 @@ a { color: var(--blue); }
    use, including older embedded WebKit); it's progressively upgraded to
    CSS Grid for browsers that support it, which gives tidier equal-width
    columns. Either way the layout wraps and stays usable. */
-.kid-grid, .chore-grid {
+.kid-grid, .job-grid {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -83,20 +83,20 @@ a { color: var(--blue); }
   flex-wrap: wrap;
   margin-top: 1.25rem;
 }
-.kid-grid > *, .chore-grid > * {
+.kid-grid > *, .job-grid > * {
   -webkit-box-flex: 1;
   -webkit-flex: 1 1 190px;
   flex: 1 1 190px;
   margin: 0 1.25rem 1.25rem 0;
 }
 @supports (display: grid) {
-  .kid-grid, .chore-grid {
+  .kid-grid, .job-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
     gap: 1.25rem;
     margin-top: 1.25rem;
   }
-  .kid-grid > *, .chore-grid > * {
+  .kid-grid > *, .job-grid > * {
     margin: 0;
   }
 }
@@ -143,8 +143,8 @@ a { color: var(--blue); }
 
 .kid-header { display: flex; gap: 1.25rem; align-items: center; margin: 1rem 0 1.75rem; }
 
-/* ===== Chore cards ===== */
-.chore-card {
+/* ===== Job cards ===== */
+.job-card {
   background: var(--card);
   border: 3px solid var(--card-border);
   border-radius: 22px;
@@ -155,16 +155,16 @@ a { color: var(--blue); }
   overflow: visible;
   transition: transform .15s ease;
 }
-.chore-grid > .chore-card:nth-child(5n+1) { border-color: var(--teal); }
-.chore-grid > .chore-card:nth-child(5n+2) { border-color: var(--pink); }
-.chore-grid > .chore-card:nth-child(5n+3) { border-color: var(--yellow); }
-.chore-grid > .chore-card:nth-child(5n+4) { border-color: var(--purple); }
-.chore-grid > .chore-card:nth-child(5n+5) { border-color: var(--blue); }
+.job-grid > .job-card:nth-child(5n+1) { border-color: var(--teal); }
+.job-grid > .job-card:nth-child(5n+2) { border-color: var(--pink); }
+.job-grid > .job-card:nth-child(5n+3) { border-color: var(--yellow); }
+.job-grid > .job-card:nth-child(5n+4) { border-color: var(--purple); }
+.job-grid > .job-card:nth-child(5n+5) { border-color: var(--blue); }
 
-.chore-card.done { opacity: 0.55; transform: scale(0.98); }
-.chore-image { width: 100%; height: 110px; object-fit: cover; border-radius: 14px; margin-bottom: 0.6rem; }
-.chore-name { font-weight: 800; font-size: 1.2rem; }
-.chore-meta { color: var(--muted); font-size: 0.95rem; margin: 0.3rem 0 1rem; font-weight: 700; }
+.job-card.done { opacity: 0.55; transform: scale(0.98); }
+.job-image { width: 100%; height: 110px; object-fit: cover; border-radius: 14px; margin-bottom: 0.6rem; }
+.job-name { font-weight: 800; font-size: 1.2rem; }
+.job-meta { color: var(--muted); font-size: 0.95rem; margin: 0.3rem 0 1rem; font-weight: 700; }
 
 /* ===== Big chunky buttons ===== */
 .btn {
@@ -184,7 +184,7 @@ a { color: var(--blue); }
 }
 .btn:hover { filter: brightness(1.08); }
 .btn:active { transform: translateY(3px); box-shadow: 0 2px 0 rgba(0,0,0,0.3); }
-.chore-card button.btn { width: 100%; }
+.job-card button.btn { width: 100%; }
 .btn.done {
   background: linear-gradient(135deg, #3d3560, #2a2246);
   color: var(--muted);
@@ -246,7 +246,7 @@ a { color: var(--blue); }
 .stat-box { background: var(--card); border: 2px solid var(--card-border); border-radius: 16px; padding: 1rem; }
 
 /* ===== Token burst animation (signature moment) =====
-   Fired from JS when a chore is completed: clones of the kid's token image
+   Fired from JS when a job is completed: clones of the kid's token image
    fly outward from the button, spinning, while a big shimmer of confetti
    and sparkles scatters with them. Kept to a single orchestrated burst
    rather than scattered effects elsewhere.
@@ -419,7 +419,7 @@ a { color: var(--blue); }
   .topbar { padding: 0.9rem 1rem; }
 
   .kid-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 0.85rem; }
-  .chore-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.85rem; }
+  .job-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.85rem; }
 
   .kid-header { flex-direction: column; align-items: flex-start; text-align: left; gap: 0.75rem; }
   .kid-avatar.large { width: 88px; height: 88px; }
@@ -432,6 +432,6 @@ a { color: var(--blue); }
 
 @media (max-width: 420px) {
   .kid-grid { grid-template-columns: repeat(2, 1fr); }
-  .chore-grid { grid-template-columns: 1fr; }
+  .job-grid { grid-template-columns: 1fr; }
   .kid-avatar { width: 76px; height: 76px; }
 }
