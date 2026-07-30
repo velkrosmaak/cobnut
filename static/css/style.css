@@ -2,22 +2,23 @@
    A dark, candy-bright theme built for kids: deep indigo-black backdrop so
    the accent colors and token art pop, chunky rounded type (Baloo 2) for
    anything a kid reads or presses, Nunito for supporting text.
+   Optimized for tablets, smart fridges (e.g. Samsung Family Hub), and touch screens.
 */
 :root {
-  --bg: #14102a;
-  --bg-alt: #1c1638;
-  --card: #241d44;
-  --card-border: #382a63;
-  --text: #f5f2ff;
-  --muted: #b3a6d9;
+  --bg: #100b24;
+  --bg-alt: #1a133a;
+  --card: #251b4d;
+  --card-border: #44327a;
+  --text: #ffffff;
+  --muted: #c7b9f0;
 
-  --pink: #ff5d8f;
-  --yellow: #ffd166;
-  --teal: #2ec4b6;
-  --purple: #a06cd5;
-  --blue: #4cc9f0;
-  --green: #4be389;
-  --red: #ff6b6b;
+  --pink: #ff3377;
+  --yellow: #ffc800;
+  --teal: #00e5ce;
+  --purple: #b055ff;
+  --blue: #38b6ff;
+  --green: #20e070;
+  --red: #ff4d4d;
 
   --font-display: 'Baloo 2', system-ui, sans-serif;
   --font-body: 'Nunito', system-ui, sans-serif;
@@ -29,12 +30,14 @@ body {
   margin: 0;
   font-family: var(--font-body);
   background:
-    radial-gradient(circle at 15% 0%, rgba(160,108,213,0.25), transparent 45%),
-    radial-gradient(circle at 90% 15%, rgba(76,201,240,0.18), transparent 40%),
+    radial-gradient(circle at 15% 0%, rgba(176,85,255,0.3), transparent 50%),
+    radial-gradient(circle at 90% 15%, rgba(56,182,255,0.25), transparent 45%),
     var(--bg);
   color: var(--text);
   min-height: 100vh;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1.4;
 }
 
 h1, h2, h3, .brand, .btn, .kid-name, .job-name {
@@ -43,58 +46,106 @@ h1, h2, h3, .brand, .btn, .kid-name, .job-name {
 
 .topbar {
   background: linear-gradient(120deg, var(--purple), var(--pink));
-  padding: 1.1rem 1.5rem;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+  padding: 1.25rem 2rem;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.45);
 }
 .brand {
-  color: white;
+  color: #ffffff;
   text-decoration: none;
   font-weight: 800;
-  font-size: 1.5rem;
-  letter-spacing: 0.3px;
+  font-size: 1.85rem;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
-.container { max-width: 1000px; margin: 0 auto; padding: 1.75rem 1.25rem 4rem; }
+.container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
 
-h1 { font-size: 2rem; font-weight: 800; margin: 0.2rem 0 1rem; }
-h2 { font-size: 1.4rem; font-weight: 700; margin: 1.75rem 0 0.75rem; color: var(--yellow); }
+h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin: 0.2rem 0 1.25rem;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  letter-spacing: -0.5px;
+}
+h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 2.25rem 0 1rem;
+  color: var(--yellow);
+  letter-spacing: 0.2px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
 
-.flashes { margin-bottom: 1rem; }
+.flashes { margin-bottom: 1.25rem; }
 .flash {
-  padding: 0.75rem 1.1rem; border-radius: 14px; margin-bottom: 0.6rem;
-  font-weight: 700; font-family: var(--font-display);
+  padding: 1rem 1.4rem;
+  border-radius: 18px;
+  margin-bottom: 0.8rem;
+  font-weight: 800;
+  font-size: 1.2rem;
+  font-family: var(--font-display);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
-.flash-success { background: rgba(75,227,137,0.18); color: var(--green); border: 2px solid rgba(75,227,137,0.4); }
-.flash-error { background: rgba(255,107,107,0.18); color: var(--red); border: 2px solid rgba(255,107,107,0.4); }
-.flash-info { background: rgba(76,201,240,0.18); color: var(--blue); border: 2px solid rgba(76,201,240,0.4); }
+.flash-success { background: rgba(32,224,112,0.22); color: #4eff9e; border: 3px solid rgba(32,224,112,0.5); }
+.flash-error { background: rgba(255,77,77,0.22); color: #ff8080; border: 3px solid rgba(255,77,77,0.5); }
+.flash-info { background: rgba(56,182,255,0.22); color: #70caff; border: 3px solid rgba(56,182,255,0.5); }
 
 a { color: var(--blue); }
 
-/* ===== Kid picker =====
-   Flexbox is the base layout (works on essentially every browser still in
-   use, including older embedded WebKit); it's progressively upgraded to
-   CSS Grid for browsers that support it, which gives tidier equal-width
-   columns. Either way the layout wraps and stays usable. */
+.back-link, .admin-link {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--yellow);
+  text-decoration: none;
+  background: var(--bg-alt);
+  padding: 0.65rem 1.4rem;
+  border-radius: 999px;
+  border: 3px solid var(--card-border);
+  transition: transform .15s ease, background .15s ease, border-color .15s ease;
+  box-shadow: 0 5px 0 rgba(0,0,0,0.25);
+  font-family: var(--font-display);
+  min-height: 52px;
+}
+.back-link:hover, .admin-link:hover {
+  transform: translateY(-3px);
+  background: var(--card);
+  border-color: var(--yellow);
+  color: #ffffff;
+}
+
+/* ===== Kid picker ===== */
 .kid-grid, .job-grid {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
-  margin-top: 1.25rem;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
 }
 .kid-grid > *, .job-grid > * {
   -webkit-box-flex: 1;
-  -webkit-flex: 1 1 190px;
-  flex: 1 1 190px;
-  margin: 0 1.25rem 1.25rem 0;
+  -webkit-flex: 1 1 260px;
+  flex: 1 1 260px;
 }
 @supports (display: grid) {
-  .kid-grid, .job-grid {
+  .kid-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-    gap: 1.25rem;
-    margin-top: 1.25rem;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.75rem;
+    margin-top: 1.5rem;
+  }
+  .job-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.75rem;
+    margin-top: 1.5rem;
   }
   .kid-grid > *, .job-grid > * {
     margin: 0;
@@ -103,135 +154,168 @@ a { color: var(--blue); }
 
 .kid-card {
   background: var(--card);
-  border: 3px solid var(--card-border);
-  border-radius: 22px;
-  padding: 1.4rem 1rem;
+  border: 4px solid var(--card-border);
+  border-radius: 30px;
+  padding: 2rem 1.4rem;
   text-align: center;
   text-decoration: none;
   color: var(--text);
-  box-shadow: 0 6px 0 rgba(0,0,0,0.25);
-  transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+  box-shadow: 0 8px 0 rgba(0,0,0,0.3);
+  transition: transform .18s cubic-bezier(.2,1.5,.5,1), border-color .15s ease, box-shadow .15s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-.kid-card:hover { transform: translateY(-4px) scale(1.02); }
-.kid-grid > .kid-card:nth-child(6n+1) { border-color: var(--pink); }
-.kid-grid > .kid-card:nth-child(6n+2) { border-color: var(--yellow); }
-.kid-grid > .kid-card:nth-child(6n+3) { border-color: var(--teal); }
-.kid-grid > .kid-card:nth-child(6n+4) { border-color: var(--purple); }
-.kid-grid > .kid-card:nth-child(6n+5) { border-color: var(--blue); }
-.kid-grid > .kid-card:nth-child(6n+6) { border-color: var(--green); }
+.kid-card:hover { transform: translateY(-6px) scale(1.03); box-shadow: 0 14px 24px rgba(0,0,0,0.4); }
+.kid-grid > .kid-card:nth-child(6n+1) { border-color: var(--pink); box-shadow: 0 8px 0 rgba(255,51,119,0.35); }
+.kid-grid > .kid-card:nth-child(6n+2) { border-color: var(--yellow); box-shadow: 0 8px 0 rgba(255,200,0,0.35); }
+.kid-grid > .kid-card:nth-child(6n+3) { border-color: var(--teal); box-shadow: 0 8px 0 rgba(0,229,206,0.35); }
+.kid-grid > .kid-card:nth-child(6n+4) { border-color: var(--purple); box-shadow: 0 8px 0 rgba(176,85,255,0.35); }
+.kid-grid > .kid-card:nth-child(6n+5) { border-color: var(--blue); box-shadow: 0 8px 0 rgba(56,182,255,0.35); }
+.kid-grid > .kid-card:nth-child(6n+6) { border-color: var(--green); box-shadow: 0 8px 0 rgba(32,224,112,0.35); }
 
 .kid-avatar {
-  width: 92px; height: 92px; border-radius: 50%; object-fit: cover;
-  margin: 0 auto; display: block; border: 4px solid rgba(255,255,255,0.15);
+  width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
+  margin: 0 auto; display: block; border: 5px solid rgba(255,255,255,0.25);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
 }
-.kid-avatar.large { width: 120px; height: 120px; }
+.kid-avatar.large { width: 190px; height: 190px; border-width: 6px; }
 .kid-avatar.placeholder {
   display: flex; align-items: center; justify-content: center;
   background: linear-gradient(135deg, var(--purple), var(--pink));
-  color: white; font-size: 2.4rem; font-weight: 800; font-family: var(--font-display);
+  color: white; font-size: 4rem; font-weight: 800; font-family: var(--font-display);
+  text-shadow: 0 3px 6px rgba(0,0,0,0.3);
 }
 
-.kid-name { font-weight: 800; margin-top: 0.6rem; font-size: 1.3rem; }
+.kid-name { font-weight: 800; margin-top: 0.9rem; font-size: 1.75rem; letter-spacing: 0.2px; }
 .kid-balance {
-  display: flex; align-items: center; justify-content: center; gap: 0.4rem;
-  color: var(--yellow); margin-top: 0.35rem; font-weight: 800; font-size: 1.15rem;
+  display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+  color: var(--yellow); margin-top: 0.5rem; font-weight: 800; font-size: 1.45rem;
   font-family: var(--font-display);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
-.kid-balance.large { font-size: 1.6rem; justify-content: flex-start; }
-.token-icon { width: 26px; height: 26px; object-fit: contain; }
-.kid-balance.large .token-icon { width: 34px; height: 34px; }
+.kid-balance.large { font-size: 2.2rem; justify-content: flex-start; }
+.token-icon { width: 42px; height: 42px; object-fit: contain; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.4)); }
+.kid-balance.large .token-icon { width: 58px; height: 58px; }
 
-.kid-header { display: flex; gap: 1.25rem; align-items: center; margin: 1rem 0 1.75rem; }
+.kid-header {
+  display: flex; gap: 2rem; align-items: center; margin: 1.25rem 0 2.25rem;
+  background: var(--bg-alt); padding: 1.6rem 2.2rem; border-radius: 32px;
+  border: 3px solid var(--card-border); box-shadow: 0 8px 0 rgba(0,0,0,0.25);
+}
 
 /* ===== Job cards ===== */
 .job-card {
   background: var(--card);
-  border: 3px solid var(--card-border);
-  border-radius: 22px;
-  padding: 1.25rem;
+  border: 4px solid var(--card-border);
+  border-radius: 30px;
+  padding: 1.6rem;
   text-align: center;
-  box-shadow: 0 6px 0 rgba(0,0,0,0.25);
+  box-shadow: 0 8px 0 rgba(0,0,0,0.3);
   position: relative;
   overflow: visible;
-  transition: transform .15s ease;
+  transition: transform .18s cubic-bezier(.2,1.5,.5,1), box-shadow .15s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-.job-grid > .job-card:nth-child(5n+1) { border-color: var(--teal); }
-.job-grid > .job-card:nth-child(5n+2) { border-color: var(--pink); }
-.job-grid > .job-card:nth-child(5n+3) { border-color: var(--yellow); }
-.job-grid > .job-card:nth-child(5n+4) { border-color: var(--purple); }
-.job-grid > .job-card:nth-child(5n+5) { border-color: var(--blue); }
+.job-grid > .job-card:nth-child(5n+1) { border-color: var(--teal); box-shadow: 0 8px 0 rgba(0,229,206,0.3); }
+.job-grid > .job-card:nth-child(5n+2) { border-color: var(--pink); box-shadow: 0 8px 0 rgba(255,51,119,0.3); }
+.job-grid > .job-card:nth-child(5n+3) { border-color: var(--yellow); box-shadow: 0 8px 0 rgba(255,200,0,0.3); }
+.job-grid > .job-card:nth-child(5n+4) { border-color: var(--purple); box-shadow: 0 8px 0 rgba(176,85,255,0.3); }
+.job-grid > .job-card:nth-child(5n+5) { border-color: var(--blue); box-shadow: 0 8px 0 rgba(56,182,255,0.3); }
 
-.job-card.done { opacity: 0.55; transform: scale(0.98); }
-.job-image { width: 100%; height: 110px; object-fit: cover; border-radius: 14px; margin-bottom: 0.6rem; }
-.job-name { font-weight: 800; font-size: 1.2rem; }
-.job-meta { color: var(--muted); font-size: 0.95rem; margin: 0.3rem 0 1rem; font-weight: 700; }
+.job-card:hover { transform: translateY(-5px); }
+.job-card.done { opacity: 0.6; transform: scale(0.98); box-shadow: none; }
+.job-image {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  border-radius: 20px;
+  margin-bottom: 0.9rem;
+  border: 3px solid rgba(255,255,255,0.12);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+.job-name { font-weight: 800; font-size: 1.65rem; line-height: 1.25; margin-bottom: 0.2rem; }
+.job-meta { color: var(--muted); font-size: 1.2rem; margin: 0.4rem 0 1.25rem; font-weight: 700; }
 
-/* ===== Big chunky buttons ===== */
+/* ===== Big chunky 3D buttons ===== */
 .btn {
   background: linear-gradient(135deg, var(--teal), var(--blue));
-  color: #0d1030;
+  color: #070c26;
   border: none;
-  border-radius: 18px;
-  padding: 1rem 1.5rem;
+  border-radius: 22px;
+  padding: 1.25rem 2rem;
+  min-height: 64px;
   font-weight: 800;
-  font-size: 1.15rem;
+  font-size: 1.45rem;
   font-family: var(--font-display);
   cursor: pointer;
   text-decoration: none;
-  display: inline-block;
-  box-shadow: 0 5px 0 rgba(0,0,0,0.3);
-  transition: transform .08s ease, box-shadow .08s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 0 #0d4469, 0 10px 20px rgba(0,0,0,0.35);
+  transition: transform .08s ease, box-shadow .08s ease, filter .15s ease;
+  letter-spacing: 0.3px;
+  user-select: none;
+  -webkit-user-select: none;
 }
-.btn:hover { filter: brightness(1.08); }
-.btn:active { transform: translateY(3px); box-shadow: 0 2px 0 rgba(0,0,0,0.3); }
-.job-card button.btn { width: 100%; }
+.btn:hover { filter: brightness(1.12); transform: translateY(-2px); }
+.btn:active { transform: translateY(5px); box-shadow: 0 3px 0 #0d4469, 0 4px 8px rgba(0,0,0,0.3); }
+.job-card button.btn { width: 100%; margin-top: auto; }
 .btn.done {
-  background: linear-gradient(135deg, #3d3560, #2a2246);
+  background: linear-gradient(135deg, #383058, #231c3c);
   color: var(--muted);
   cursor: default;
-  box-shadow: none;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.3);
+  font-size: 1.25rem;
 }
+.btn.done:hover { transform: none; filter: none; }
 .btn.shake { animation: shake 0.4s ease; }
 
-.back-link, .admin-link { display: inline-block; margin-bottom: 0.5rem; font-weight: 700; }
+.recent-list { padding-left: 1.5rem; color: var(--muted); font-weight: 700; font-size: 1.15rem; line-height: 1.8; }
 
-.recent-list { padding-left: 1.2rem; color: var(--muted); font-weight: 700; }
-
-/* ===== Admin (kept calmer/denser — parents, not kids, use this) ===== */
+/* ===== Admin ===== */
 .admin-nav { display: flex; gap: 1.25rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
-.admin-nav a { color: var(--yellow); text-decoration: none; font-weight: 800; font-family: var(--font-display); }
+.admin-nav a {
+  color: var(--yellow); text-decoration: none; font-weight: 800; font-family: var(--font-display);
+  font-size: 1.2rem; background: var(--bg-alt); padding: 0.5rem 1.1rem; border-radius: 12px;
+  border: 2px solid var(--card-border);
+}
 
 .admin-grid {
   display: -webkit-box; display: -webkit-flex; display: flex;
   -webkit-flex-wrap: wrap; flex-wrap: wrap;
   margin: 1rem 0;
 }
-.admin-grid > * { -webkit-flex: 1 1 220px; flex: 1 1 220px; margin: 0 1rem 1rem 0; }
+.admin-grid > * { -webkit-flex: 1 1 240px; flex: 1 1 240px; margin: 0 1rem 1rem 0; }
 @supports (display: grid) {
-  .admin-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+  .admin-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.25rem; }
   .admin-grid > * { margin: 0; }
 }
-.admin-card { background: var(--card); border: 2px solid var(--card-border); border-radius: 16px; padding: 1.1rem; margin-bottom: 1rem; }
-.admin-card-header { display: flex; align-items: center; gap: 0.75rem; }
-.admin-card-header .kid-avatar { width: 48px; height: 48px; margin: 0; }
+.admin-card { background: var(--card); border: 3px solid var(--card-border); border-radius: 22px; padding: 1.4rem; margin-bottom: 1.25rem; }
+.admin-card-header { display: flex; align-items: center; gap: 1rem; }
+.admin-card-header .kid-avatar { width: 64px; height: 64px; margin: 0; border-width: 3px; }
 
-.admin-table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; }
-.admin-table th, .admin-table td { text-align: left; padding: 0.6rem; border-bottom: 1px solid var(--card-border); }
-.thumb { width: 40px; height: 40px; object-fit: cover; border-radius: 8px; }
+.admin-table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; font-size: 1.1rem; }
+.admin-table th, .admin-table td { text-align: left; padding: 0.8rem; border-bottom: 2px solid var(--card-border); }
+.thumb { width: 60px; height: 60px; object-fit: cover; border-radius: 12px; border: 2px solid rgba(255,255,255,0.15); }
 
-.stacked-form { display: flex; flex-direction: column; gap: 0.9rem; max-width: 420px; margin-top: 1rem; }
-.stacked-form label { display: flex; flex-direction: column; gap: 0.3rem; font-weight: 700; font-size: 0.95rem; }
+.stacked-form { display: flex; flex-direction: column; gap: 1rem; max-width: 480px; margin-top: 1rem; }
+.stacked-form label { display: flex; flex-direction: column; gap: 0.4rem; font-weight: 700; font-size: 1.1rem; }
 .stacked-form input[type="text"], .stacked-form input[type="number"], .stacked-form select {
-  padding: 0.6rem; border: 2px solid var(--card-border); border-radius: 10px; font-size: 1rem;
-  background: var(--bg-alt); color: var(--text);
+  padding: 0.8rem 1rem; border: 3px solid var(--card-border); border-radius: 14px; font-size: 1.15rem;
+  background: var(--bg-alt); color: var(--text); font-weight: 700;
 }
 .checkbox-label { flex-direction: row !important; align-items: center; }
-.preview { width: 60px; height: 60px; object-fit: cover; border-radius: 10px; margin-bottom: 0.3rem; }
+.preview { width: 80px; height: 80px; object-fit: cover; border-radius: 14px; margin-bottom: 0.5rem; }
 
 .inline-form { display: inline; }
-.link-btn { background: none; border: none; color: var(--blue); cursor: pointer; padding: 0; font: inherit; text-decoration: underline; font-weight: 700; }
+.link-btn { background: none; border: none; color: var(--blue); cursor: pointer; padding: 0; font: inherit; text-decoration: underline; font-weight: 800; }
 .link-btn.danger { color: var(--red); }
-.tag { font-size: 0.7rem; background: var(--bg-alt); color: var(--muted); padding: 0.15rem 0.5rem; border-radius: 8px; }
+.tag { font-size: 0.85rem; background: var(--bg-alt); color: var(--muted); padding: 0.2rem 0.6rem; border-radius: 8px; font-weight: 800; }
 
 .stats-grid {
   display: -webkit-box; display: -webkit-flex; display: flex;
@@ -243,27 +327,9 @@ a { color: var(--blue); }
   .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
   .stats-grid > * { margin: 0; }
 }
-.stat-box { background: var(--card); border: 2px solid var(--card-border); border-radius: 16px; padding: 1rem; }
+.stat-box { background: var(--card); border: 3px solid var(--card-border); border-radius: 22px; padding: 1.25rem; }
 
-/* ===== Token burst animation (signature moment) =====
-   Fired from JS when a job is completed: clones of the kid's token image
-   fly outward from the button, spinning, while a big shimmer of confetti
-   and sparkles scatters with them. Kept to a single orchestrated burst
-   rather than scattered effects elsewhere.
-
-   Movement and fade are two SEPARATE animations on the same element: the
-   fly-out is quick and explosive, but opacity fades out on its own, much
-   longer timeline afterwards, so particles linger and drift for a slower,
-   more magical finish instead of an abrupt end.
-
-   Compatibility note: this targets Chromium/WebKit engines broadly in use
-   today, including embedded/TV-style browsers such as the one on Samsung
-   Family Hub fridges (Tizen's browser). -webkit- prefixes are included
-   alongside standard properties for animation/transform/keyframes since
-   some of these embedded browsers lag several Chromium versions behind
-   desktop releases. The sparkle shape has a plain-diamond fallback (via
-   rotate) for engines without clip-path support, upgraded to a true star
-   only where @supports confirms clip-path works. */
+/* ===== Token burst animation (signature moment) ===== */
 .burst-layer {
   position: fixed;
   top: 0; right: 0; bottom: 0; left: 0;
@@ -281,20 +347,20 @@ a { color: var(--blue); }
 }
 
 .burst-token {
-  width: 42px;
-  height: 42px;
+  width: 64px;
+  height: 64px;
   object-fit: contain;
   -webkit-animation: burst-move 950ms cubic-bezier(.12,.9,.28,1) forwards,
                       burst-fade 3200ms ease-out forwards;
   animation: burst-move 950ms cubic-bezier(.12,.9,.28,1) forwards,
              burst-fade 3200ms ease-out forwards;
-  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.45));
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
 }
 
 .burst-spark {
-  width: 10px;
-  height: 10px;
-  border-radius: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
   -webkit-animation: burst-move 850ms cubic-bezier(.12,.9,.28,1) forwards,
                       burst-fade 2600ms ease-out forwards;
   animation: burst-move 850ms cubic-bezier(.12,.9,.28,1) forwards,
@@ -302,8 +368,8 @@ a { color: var(--blue); }
 }
 
 .burst-sparkle {
-  width: 18px;
-  height: 18px;
+  width: 26px;
+  height: 26px;
   -webkit-animation: burst-move 900ms cubic-bezier(.12,.9,.28,1) forwards,
                       burst-fade 2900ms ease-out forwards;
   animation: burst-move 900ms cubic-bezier(.12,.9,.28,1) forwards,
@@ -319,7 +385,6 @@ a { color: var(--blue); }
   -webkit-animation: sparkle-twinkle 420ms ease-in-out infinite alternate;
   animation: sparkle-twinkle 420ms ease-in-out infinite alternate;
 }
-/* Progressive enhancement: true 8-point star shape where clip-path works */
 @supports (clip-path: polygon(0 0, 0 0, 0 0)) or (-webkit-clip-path: polygon(0 0, 0 0, 0 0)) {
   .burst-sparkle::before {
     -webkit-transform: none;
@@ -331,16 +396,15 @@ a { color: var(--blue); }
 
 @-webkit-keyframes burst-move {
   0% { -webkit-transform: translate(0,0) scale(0.35) rotate(0deg); }
-  15% { -webkit-transform: translate(calc(var(--dx) * 0.3), calc(var(--dy) * 0.3)) scale(1.25) rotate(calc(var(--rot) * 0.3)); }
-  100% { -webkit-transform: translate(var(--dx), var(--dy)) scale(1.1) rotate(var(--rot)); }
+  15% { -webkit-transform: translate(calc(var(--dx) * 0.3), calc(var(--dy) * 0.3)) scale(1.3) rotate(calc(var(--rot) * 0.3)); }
+  100% { -webkit-transform: translate(var(--dx), var(--dy)) scale(1.15) rotate(var(--rot)); }
 }
 @keyframes burst-move {
   0% { transform: translate(0,0) scale(0.35) rotate(0deg); }
-  15% { transform: translate(calc(var(--dx) * 0.3), calc(var(--dy) * 0.3)) scale(1.25) rotate(calc(var(--rot) * 0.3)); }
-  100% { transform: translate(var(--dx), var(--dy)) scale(1.1) rotate(var(--rot)); }
+  15% { transform: translate(calc(var(--dx) * 0.3), calc(var(--dy) * 0.3)) scale(1.3) rotate(calc(var(--rot) * 0.3)); }
+  100% { transform: translate(var(--dx), var(--dy)) scale(1.15) rotate(var(--rot)); }
 }
 
-/* Slow, lingering fade — this is what gives the burst its "magical" finish. */
 @-webkit-keyframes burst-fade {
   0% { opacity: 1; }
   55% { opacity: 1; }
@@ -364,41 +428,41 @@ a { color: var(--blue); }
 .ring-pulse {
   position: absolute;
   border-radius: 50%;
-  border: 4px solid var(--yellow);
+  border: 5px solid var(--yellow);
   -webkit-animation: ring-grow 700ms ease-out forwards;
   animation: ring-grow 700ms ease-out forwards;
 }
 .ring-pulse.ring-2 { border-color: var(--pink); -webkit-animation-delay: 90ms; animation-delay: 90ms; }
 @-webkit-keyframes ring-grow {
   0% { -webkit-transform: scale(0.3); opacity: 0.9; }
-  100% { -webkit-transform: scale(4.2); opacity: 0; }
+  100% { -webkit-transform: scale(4.5); opacity: 0; }
 }
 @keyframes ring-grow {
   0% { transform: scale(0.3); opacity: 0.9; }
-  100% { transform: scale(4.2); opacity: 0; }
+  100% { transform: scale(4.5); opacity: 0; }
 }
 
 .balance-pop { -webkit-animation: pop 480ms cubic-bezier(.3,1.7,.5,1); animation: pop 480ms cubic-bezier(.3,1.7,.5,1); }
 @-webkit-keyframes pop {
   0% { -webkit-transform: scale(1); }
-  40% { -webkit-transform: scale(1.45); color: var(--green); }
+  40% { -webkit-transform: scale(1.55); color: var(--green); }
   100% { -webkit-transform: scale(1); }
 }
 @keyframes pop {
   0% { transform: scale(1); }
-  40% { transform: scale(1.45); color: var(--green); }
+  40% { transform: scale(1.55); color: var(--green); }
   100% { transform: scale(1); }
 }
 
 @-webkit-keyframes shake {
   0%, 100% { -webkit-transform: translateX(0); }
-  25% { -webkit-transform: translateX(-6px); }
-  75% { -webkit-transform: translateX(6px); }
+  25% { -webkit-transform: translateX(-8px); }
+  75% { -webkit-transform: translateX(8px); }
 }
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-6px); }
-  75% { transform: translateX(6px); }
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -411,27 +475,30 @@ a { color: var(--blue); }
 /* ===== Responsive layout ===== */
 .table-scroll { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
-@media (max-width: 720px) {
-  .container { padding: 1.1rem 0.85rem 3rem; }
-  h1 { font-size: 1.6rem; }
-  h2 { font-size: 1.2rem; }
-  .brand { font-size: 1.25rem; }
-  .topbar { padding: 0.9rem 1rem; }
+@media (max-width: 900px) {
+  .container { padding: 1.25rem 1rem 4rem; }
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.6rem; }
+  .brand { font-size: 1.5rem; }
+  .topbar { padding: 1rem 1.25rem; }
 
-  .kid-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 0.85rem; }
-  .job-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.85rem; }
+  .kid-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.25rem; }
+  .job-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.25rem; }
 
-  .kid-header { flex-direction: column; align-items: flex-start; text-align: left; gap: 0.75rem; }
-  .kid-avatar.large { width: 88px; height: 88px; }
-  .kid-balance.large { font-size: 1.3rem; }
+  .kid-header { flex-direction: column; align-items: flex-start; text-align: left; gap: 1rem; padding: 1.25rem; }
+  .kid-avatar.large { width: 140px; height: 140px; }
+  .kid-balance.large { font-size: 1.8rem; }
+  .token-icon { width: 36px; height: 36px; }
+  .kid-balance.large .token-icon { width: 48px; height: 48px; }
 
-  .btn { font-size: 1.05rem; padding: 0.9rem 1.2rem; }
+  .btn { font-size: 1.25rem; padding: 1rem 1.5rem; min-height: 56px; }
   .admin-nav { gap: 0.9rem; }
   .stacked-form { max-width: 100%; }
 }
 
-@media (max-width: 420px) {
-  .kid-grid { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 500px) {
+  .kid-grid { grid-template-columns: 1fr; }
   .job-grid { grid-template-columns: 1fr; }
-  .kid-avatar { width: 76px; height: 76px; }
+  .kid-avatar { width: 120px; height: 120px; }
+  .job-image { height: 170px; }
 }

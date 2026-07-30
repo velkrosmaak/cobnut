@@ -93,7 +93,7 @@
       setVar(el, "--dx", dx + "px");
       setVar(el, "--dy", dy + "px");
       setVar(el, "--rot", rand(-420, 420) + "deg");
-      size = rand(30, 48);
+      size = rand(55, 90);
       el.style.width = size + "px";
       el.style.height = size + "px";
       el.style.left = (originX - size / 2) + "px";
